@@ -28,7 +28,7 @@ def main():
     c1 = Cell(x1=50, x2=100, y1=150, y2=200)
     c2 = Cell(x1=150, x2=200, y1=150, y2=200, up=False, right=False)
 
-    m = Maze(50,50, 20, 20, 20,20, win, seed=123)
+    m = Maze(50,50, 20, 20, 20,20, win, seed=None)
     m.draw()
 
     m.break_walls(0,0)
