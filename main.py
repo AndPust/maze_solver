@@ -2,6 +2,7 @@ from window import Window
 from line import Line
 from point import Point
 from cell import Cell
+from maze import Maze
 
 import time
 
@@ -18,8 +19,8 @@ def main():
     # l3 = Line(Point(midx, midy + 50), Point(midx, midy + 150))
     # l4 = Line(Point(midx - 50, midy), Point(midx - 150, midy))
 
-    l0.draw(win.canvas, "red")
-    l1.draw(win.canvas)
+    # l0.draw(win.canvas, "red")
+    # l1.draw(win.canvas)
     # l2.draw(win.canvas)
     # l3.draw(win.canvas)
     # l4.draw(win.canvas)
@@ -27,18 +28,34 @@ def main():
     c1 = Cell(x1=50, x2=100, y1=150, y2=200)
     c2 = Cell(x1=150, x2=200, y1=150, y2=200, up=False, right=False)
 
-    c1.draw(win.canvas)
-    c2.draw(win.canvas)
+    # c1.draw(win.canvas)
+    # c2.draw(win.canvas)
 
-    c1.draw_move(win.canvas, c2)
+    # c1.draw_move(win.canvas, c2)
 
-    win.redraw()
+    m = Maze(50,50, 20, 20, 20,20, win, seed=123)
+    m.draw()
 
-    time.sleep(3)
+    m.break_walls(0,0)
 
-    c1.draw_move(win.canvas, c2, True)
+    m.reset_cells_visited()
 
-    win.redraw()
+    # m.x1 += 300
+
+    m.draw()
+
+
+  
+
+    
+
+    # win.redraw()
+
+    # time.sleep(3)
+
+    # c1.draw_move(win.canvas, c2, True)
+
+    # win.redraw()
 
     win.wait_for_close()
 
