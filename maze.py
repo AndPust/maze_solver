@@ -46,6 +46,7 @@ class Maze(object):
         self._cells[0][0].up = False
         # self.draw_cell(0,0)
         self._cells[self.num_cols-1][self.num_rows-1].down = False
+        self._cells[self.num_cols-1][self.num_rows-1].finish = True
         # self.draw_cell(self.num_cols-1, self.num_rows-1)
         
     def break_walls(self, i, j, side=None):
@@ -124,6 +125,46 @@ class Maze(object):
         for r in self._cells:
             for c in r:
                 c.visited = False
+    
+    def solve(self, x, y):
+        self._cells[x][y].visited = True
+
+        print("MY CELL:")
+        print(self._cells[x][y])
+
+        if self._cells[x][y].finish:
+            return True
+        
+        nei = []
+        if x != 0 and not self._cells[x-1][y].visited and not self._cells[x][y].left:
+            nei.append((x-1,y,"right"))
+        if y != 0 and not self._cells[x][y-1].visited and not self._cells[x][y].up:
+            nei.append((x,y-1,"down"))
+        if x != self.num_cols-1 and not self._cells[x+1][y].visited and not self._cells[x][y].right:
+            nei.append((x+1,y,"left"))
+        if y != self.num_rows-1 and not self._cells[x][y+1].visited and not self._cells[x][y].down:
+            nei.append((x,y+1,"up"))
+        
+        for n in nei:
+            print(n)
+            print(x, y)
+            print(n[0], n[1])
+            self._cells[x][y].draw_move(self.win.canvas, self._cells[n[0]][n[1]])
+            self.win.redraw()
+            time.sleep(0.02)
+
+            res = self.solve(n[0], n[1])
+
+            if res:
+                return True
+            
+            self._cells[x][y].draw_move(self.win.canvas, self._cells[n[0]][n[1]], undo=True)
+            self.win.redraw()
+            time.sleep(0.02)
+        
+        return False
+
+
 
 
 

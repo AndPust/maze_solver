@@ -28,11 +28,6 @@ def main():
     c1 = Cell(x1=50, x2=100, y1=150, y2=200)
     c2 = Cell(x1=150, x2=200, y1=150, y2=200, up=False, right=False)
 
-    # c1.draw(win.canvas)
-    # c2.draw(win.canvas)
-
-    # c1.draw_move(win.canvas, c2)
-
     m = Maze(50,50, 20, 20, 20,20, win, seed=123)
     m.draw()
 
@@ -40,22 +35,10 @@ def main():
 
     m.reset_cells_visited()
 
-    # m.x1 += 300
-
     m.draw()
 
-
-  
-
-    
-
-    # win.redraw()
-
-    # time.sleep(3)
-
-    # c1.draw_move(win.canvas, c2, True)
-
-    # win.redraw()
+    if m.solve(0,0):
+        print("NICE!")
 
     win.wait_for_close()
 
